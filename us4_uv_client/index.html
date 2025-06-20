@@ -1,1 +1,65 @@
-<!-- your US4 HTML will be here -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>US4 Proxy</title>
+    <link rel="icon" href="/favicon.ico" />
+    <script src="/static/uv/uv.bundle.js" defer></script>
+    <script src="/static/uv/uv.config.js" defer></script>
+    <script src="/static/register-sw.js" defer></script>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+      input {
+        padding: 10px;
+        width: 300px;
+        font-size: 1rem;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: white;
+        color: black;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>US4 Proxy</h1>
+    <input type="text" id="url" placeholder="Enter URL or search" />
+    <button onclick="go()">Go</button>
+
+    <script>
+      function go() {
+        const input = document.getElementById("url").value.trim();
+        const isURL = input.includes(".") && !input.includes(" ");
+        const finalURL = isURL ? input : "https://www.google.com/search?q=" + encodeURIComponent(input);
+        location.href = "/static/load/" + __uv$config.encodeUrl(finalURL);
+      }
+    </script>
+  </body>
+</html>
